@@ -1,0 +1,162 @@
+{
+	"info": {
+		"_postman_id": "8fc84180-f6fe-464f-8041-93052ad4b293",
+		"name": "my-json-server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetId(/1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "88304f7a-3bb2-464e-bbcd-b39a0c5fee34",
+						"exec": [
+							"const jsonData = {",
+							" \"Titles\":[",
+							"  {",
+							"    \"id\": 1,",
+							"    \"title\": \"Post 1\"",
+							"  },",
+							"  {",
+							"    \"id\": 2,",
+							"    \"title\": \"Post 2\"",
+							"  },",
+							"  {",
+							"    \"id\": 3,",
+							"    \"title\": \"Post 3\"",
+							"  }",
+							"]",
+							"}",
+							"console.log(jsonData.Titles.filter(c => c.id === 1))",
+							"",
+							"    if (pm.test(\"Status code is ok\", function() {",
+							"            pm.response.to.have.status(200);",
+							"        }));",
+							"        ",
+							"postman.setNextRequest('GetId(?id=1)');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://my-json-server.typicode.com/typicode/demo/posts/1",
+					"protocol": "https",
+					"host": [
+						"my-json-server",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"typicode",
+						"demo",
+						"posts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetId(?id=1)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0a839791-ad76-4bf6-b18f-aa6f09e22b0a",
+						"exec": [
+							"var jsonArrayData = pm.response.json();",
+							"",
+							"for (var i = 0; i < jsonArrayData.length; i++) {",
+							" console.log(\"1st title ids:\"+jsonArrayData[0].id);",
+							" console.log(\"1st title name:\"+jsonArrayData[0].title);  ",
+							"}",
+							"    if (pm.test(\"Status code is ok\", function() {",
+							"            pm.response.to.have.status(200);",
+							"        }));",
+							"  console.log (\"id and title shouldn't return a array\");      ",
+							"postman.setNextRequest('GetListId');"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://my-json-server.typicode.com/typicode/demo/posts?id=1",
+					"protocol": "https",
+					"host": [
+						"my-json-server",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"typicode",
+						"demo",
+						"posts"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetListId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d8bc1ab1-b2bc-49a7-9059-da862978bc12",
+						"exec": [
+							"var jsonArrayData = pm.response.json();",
+							"// To get total ids",
+							"for (var i = 0; i < jsonArrayData.length; i++) {",
+							"// output id, tittle id, title name",
+							"console.log(jsonArrayData[i].id);",
+							"console.log(\"title ids:\"+jsonArrayData[i].id);",
+							"console.log(\"title name:\"+jsonArrayData[i].title);  ",
+							"}",
+							" if (pm.test(\"Status code is ok\", function() {",
+							"            pm.response.to.have.status(200);",
+							"        }));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://my-json-server.typicode.com/typicode/demo/posts/",
+					"protocol": "https",
+					"host": [
+						"my-json-server",
+						"typicode",
+						"com"
+					],
+					"path": [
+						"typicode",
+						"demo",
+						"posts",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
